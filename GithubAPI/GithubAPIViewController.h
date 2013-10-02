@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GithubAPIViewController : UIViewController
+@interface GithubAPIViewController : UITableViewController
 
 @end

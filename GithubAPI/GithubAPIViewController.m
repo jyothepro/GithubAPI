@@ -7,6 +7,7 @@
 //
 
 #import "GithubAPIViewController.h"
+#import "GithubAPIService.h"
 
 @interface GithubAPIViewController ()
 
@@ -18,6 +19,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	[[GithubAPIService sharedInstance] getAllMembers:^(NSDictionary *data){
+		NSLog(@"Data: %@", data);
+	}
+									   errorCallback:^(NSError *error) {
+										   NSLog(@"Error: %@", error);
+									   }];
+
+	UILabel *myLable = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
+	myLable.text = @"Testing";
+	[self.view addSubview:myLable];
+	
+	
 }
 
 - (void)didReceiveMemoryWarning
