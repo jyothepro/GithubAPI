@@ -8,33 +8,87 @@
 
 #import "GithubAPIViewController.h"
 #import "GithubAPIService.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "GithubUserViewController.h"
 
 @interface GithubAPIViewController ()
-
+@property(nonatomic, retain) NSDictionary *githubUsers;
 @end
 
 @implementation GithubAPIViewController
+@synthesize githubUsers = _githubUsers;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	self.title = @"ShopSavvy Users";
+	//self.tableView.backgroundColor = [UIColor redColor];
 	[[GithubAPIService sharedInstance] getAllMembers:^(NSDictionary *data){
 		NSLog(@"Data: %@", data);
+		_githubUsers = data;
+		[self.tableView reloadData];
 	}
 									   errorCallback:^(NSError *error) {
 										   NSLog(@"Error: %@", error);
 									   }];
-
-	UILabel *myLable = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
-	myLable.text = @"Testing";
-	[self.view addSubview:myLable];
 	
-	
+	[[GithubAPIService sharedInstance] getMember:@"558188"
+								 andWithCallback:^(NSDictionary *data){
+									 NSLog(@"Data: %@", data);
+								 }
+								   errorCallback:^(NSError *error) {
+										   NSLog(@"Error: %@", error);
+									   }];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	//count of section
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	//count number of rows
+    return [_githubUsers count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+		 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+	static NSString *MyIdentifier = @"MyIdentifier";
+	
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+	
+	if (cell == nil) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+									   reuseIdentifier:MyIdentifier];
+	}
+
+	NSArray *keys = [_githubUsers allKeys];
+	id aKey = [keys objectAtIndex:indexPath.row];
+	
+	NSString *loginName = [[_githubUsers objectForKey:aKey] objectForKey:@"login"];
+	loginName = [loginName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[loginName substringToIndex:1] uppercaseString]];
+	cell.textLabel.text = loginName;
+	
+	
+	UIImageView *addImage = [[UIImageView alloc] init];
+	[addImage setImageWithURL:[NSURL URLWithString:[[_githubUsers objectForKey:aKey] objectForKey:@"avatar_url"]] placeholderImage:[UIImage imageNamed:@"default.avatar.png"] options:SDWebImageCacheMemoryOnly];
+	[addImage setFrame:CGRectMake(3, 1, 40, 40)];
+	[cell.contentView addSubview:addImage];
+	[cell setIndentationLevel:5];
+	
+	//cell.accessoryView = addImage;
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	NSArray *keys = [_githubUsers allKeys];
+	id aKey = [keys objectAtIndex:indexPath.row];
+	
+	GithubUserViewController *userVC = [[GithubUserViewController alloc] initWithUser:[_githubUsers objectForKey:aKey]];
+	[self.navigationController pushViewController:userVC animated:YES];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

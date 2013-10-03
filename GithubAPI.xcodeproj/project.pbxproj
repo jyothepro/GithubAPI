@@ -22,6 +22,10 @@
 		3228B06D17FBD89100A27EA9 /* GithubAPITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3228B06C17FBD89100A27EA9 /* GithubAPITests.m */; };
 		3228B07817FBDD0200A27EA9 /* GithubAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3228B07717FBDD0200A27EA9 /* GithubAPIService.m */; };
 		3228B07917FBDD0200A27EA9 /* GithubAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3228B07717FBDD0200A27EA9 /* GithubAPIService.m */; };
+		3228B08217FD3E2E00A27EA9 /* default.avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3228B08117FD3E2E00A27EA9 /* default.avatar.png */; };
+		3228B08317FD3E2E00A27EA9 /* default.avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3228B08117FD3E2E00A27EA9 /* default.avatar.png */; };
+		3228B08617FD3FC300A27EA9 /* GithubUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3228B08517FD3FC300A27EA9 /* GithubUserViewController.m */; };
+		3228B08717FD3FC300A27EA9 /* GithubUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3228B08517FD3FC300A27EA9 /* GithubUserViewController.m */; };
 		C2BA3F4FA4004E018112EE08 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2DD469A76748A7819E864E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +60,9 @@
 		3228B06C17FBD89100A27EA9 /* GithubAPITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubAPITests.m; sourceTree = "<group>"; };
 		3228B07617FBDD0200A27EA9 /* GithubAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAPIService.h; sourceTree = "<group>"; };
 		3228B07717FBDD0200A27EA9 /* GithubAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubAPIService.m; sourceTree = "<group>"; };
+		3228B08117FD3E2E00A27EA9 /* default.avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.avatar.png; sourceTree = "<group>"; };
+		3228B08417FD3FC300A27EA9 /* GithubUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubUserViewController.h; sourceTree = "<group>"; };
+		3228B08517FD3FC300A27EA9 /* GithubUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubUserViewController.m; sourceTree = "<group>"; };
 		5B2DD469A76748A7819E864E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A124AA75EF3E488DB99EA37C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -120,10 +127,13 @@
 		3228B04417FBD89000A27EA9 /* GithubAPI */ = {
 			isa = PBXGroup;
 			children = (
+				3228B07A17FD3DF500A27EA9 /* Assets */,
 				3228B04D17FBD89000A27EA9 /* GithubAPIAppDelegate.h */,
 				3228B04E17FBD89000A27EA9 /* GithubAPIAppDelegate.m */,
 				3228B05617FBD89000A27EA9 /* GithubAPIViewController.h */,
 				3228B05717FBD89000A27EA9 /* GithubAPIViewController.m */,
+				3228B08417FD3FC300A27EA9 /* GithubUserViewController.h */,
+				3228B08517FD3FC300A27EA9 /* GithubUserViewController.m */,
 				3228B05917FBD89000A27EA9 /* Images.xcassets */,
 				3228B04517FBD89000A27EA9 /* Supporting Files */,
 				3228B07617FBDD0200A27EA9 /* GithubAPIService.h */,
@@ -159,6 +169,14 @@
 				3228B06917FBD89100A27EA9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3228B07A17FD3DF500A27EA9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3228B08117FD3E2E00A27EA9 /* default.avatar.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3228B05A17FBD89000A27EA9 /* Images.xcassets in Resources */,
+				3228B08217FD3E2E00A27EA9 /* default.avatar.png in Resources */,
 				3228B04917FBD89000A27EA9 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3228B06B17FBD89100A27EA9 /* InfoPlist.strings in Resources */,
+				3228B08317FD3E2E00A27EA9 /* default.avatar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +313,7 @@
 			files = (
 				3228B04F17FBD89000A27EA9 /* GithubAPIAppDelegate.m in Sources */,
 				3228B04B17FBD89000A27EA9 /* main.m in Sources */,
+				3228B08617FD3FC300A27EA9 /* GithubUserViewController.m in Sources */,
 				3228B05817FBD89000A27EA9 /* GithubAPIViewController.m in Sources */,
 				3228B07817FBDD0200A27EA9 /* GithubAPIService.m in Sources */,
 			);
@@ -304,6 +325,7 @@
 			files = (
 				3228B06D17FBD89100A27EA9 /* GithubAPITests.m in Sources */,
 				3228B07917FBDD0200A27EA9 /* GithubAPIService.m in Sources */,
+				3228B08717FD3FC300A27EA9 /* GithubUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
