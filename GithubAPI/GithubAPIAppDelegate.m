@@ -8,6 +8,7 @@
 
 #import "GithubAPIAppDelegate.h"
 #import "GithubAPIViewController.h"
+#import "GithubUserViewController.h"
 
 @implementation GithubAPIAppDelegate
 
@@ -16,9 +17,14 @@
     // Override point for customization after application launch.
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[GithubAPIViewController alloc] init]];
-    self.window.rootViewController = navController;
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+//to-do
+	} else {
+//to-do
+	}
+	
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[GithubAPIViewController alloc] init]];
+	self.window.rootViewController = navController;
     
     [self.window makeKeyAndVisible];
     return YES;

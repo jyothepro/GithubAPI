@@ -30,14 +30,28 @@
 	}
 									   errorCallback:^(NSError *error) {
 										   NSLog(@"Error: %@", error);
-									   }];
-	
-	[[GithubAPIService sharedInstance] getMember:@"558188"
-								 andWithCallback:^(NSDictionary *data){
-									 NSLog(@"Data: %@", data);
-								 }
-								   errorCallback:^(NSError *error) {
-										   NSLog(@"Error: %@", error);
+										   /*
+											po [error.userInfo objectForKey:@"AFNetworkingOperationFailingURLResponseErrorKey"]
+											*/
+										   NSHTTPURLResponse *repsonse = [error.userInfo objectForKey:@"AFNetworkingOperationFailingURLResponseErrorKey"];
+										   NSDictionary *respHeaders = [repsonse allHeaderFields];
+										   NSString *failText = @"";
+										   if ([respHeaders objectForKey:@"X-RateLimit-Remaining"]) {
+											   NSString *rem = [respHeaders objectForKey:@"X-RateLimit-Remaining"];
+											   if ([rem isEqualToString:@"0"]){
+												   NSLog(@"Rate limit reached please try again later");
+												   failText = @"Rate limit reached please try again later";
+											   }
+										   } else {
+											   failText = @"Currently unable to fetch data try again later";
+										   }
+										   
+										   UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Error"
+																							 message: failText
+																							delegate:nil
+																				   cancelButtonTitle:nil
+																				   otherButtonTitles:nil];
+										   [message show];
 									   }];
 }
 
@@ -71,8 +85,12 @@
 	
 	
 	UIImageView *addImage = [[UIImageView alloc] init];
-	[addImage setImageWithURL:[NSURL URLWithString:[[_githubUsers objectForKey:aKey] objectForKey:@"avatar_url"]] placeholderImage:[UIImage imageNamed:@"default.avatar.png"] options:SDWebImageCacheMemoryOnly];
 	[addImage setFrame:CGRectMake(3, 1, 40, 40)];
+	[addImage setImageWithURL:[NSURL URLWithString:[[_githubUsers objectForKey:aKey] objectForKey:@"avatar_url"]]
+			 placeholderImage:[UIImage imageNamed:@"default.avatar.png"]
+					  options:SDWebImageCacheMemoryOnly
+	 ];
+	
 	[cell.contentView addSubview:addImage];
 	[cell setIndentationLevel:5];
 	
