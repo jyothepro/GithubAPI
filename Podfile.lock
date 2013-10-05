@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
   - ISDiskCache (0.1.0)
   - JSONKit (1.5pre)
+  - MBProgressHUD (0.8)
   - SDWebImage (3.4):
     - SDWebImage/Core
   - SDWebImage/Core (3.4)
@@ -29,12 +30,14 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - ISDiskCache (~> 0.1.0)
   - JSONKit (~> 1.4)
+  - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.4)
 
 SPEC CHECKSUMS:
   AFNetworking: 3fa983b1beaba69566a3374612511e2a6e3fe845
   ISDiskCache: 98dbbedb8442b7f744cb016ddd55637722b851dc
   JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   SDWebImage: 366188f04c019bfd712d45e3b36aa52070f4abd8
 
 COCOAPODS: 0.20.2

@@ -9,6 +9,7 @@
 #import "GithubUserViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "GithubAPIService.h"
+#import <MBProgressHUD.h>
 
 @interface GithubUserViewController ()
 @property (nonatomic, retain) NSDictionary *user;
@@ -107,13 +108,20 @@
 	// Do any additional setup after loading the view.
 	self.title = [_user objectForKey:@"login"];
 	self.view.backgroundColor = [UIColor whiteColor];
+	[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	
 	[[GithubAPIService sharedInstance] getUserProfile:[_user objectForKey:@"id"]
 										 withCallback:^(NSDictionary *data) {
+											 dispatch_async(dispatch_get_main_queue(), ^{
+												 [MBProgressHUD hideHUDForView:self.view animated:YES];
+											 });
 											 _profile = data;
 											 [self updateView:data];
 										 }
 										errorCallback:^(NSError *error) {
+											dispatch_async(dispatch_get_main_queue(), ^{
+												[MBProgressHUD hideHUDForView:self.view animated:YES];
+											});
 											UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
 																	   message: @"Cannot connect to server try later"
 																	  delegate:nil

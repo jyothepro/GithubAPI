@@ -10,6 +10,7 @@
 #import "GithubAPIService.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "GithubUserViewController.h"
+#import <MBProgressHUD.h>
 
 @interface GithubAPIViewController ()
 @property(nonatomic, retain) NSDictionary *githubUsers;
@@ -22,17 +23,21 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	self.title = @"ShopSavvy Users";
-	//self.tableView.backgroundColor = [UIColor redColor];
+	[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	[[GithubAPIService sharedInstance] getAllMembers:^(NSDictionary *data){
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[MBProgressHUD hideHUDForView:self.view animated:YES];
+		});
+		
 		NSLog(@"Data: %@", data);
 		_githubUsers = data;
 		[self.tableView reloadData];
 	}
 									   errorCallback:^(NSError *error) {
-										   NSLog(@"Error: %@", error);
-										   /*
-											po [error.userInfo objectForKey:@"AFNetworkingOperationFailingURLResponseErrorKey"]
-											*/
+										   dispatch_async(dispatch_get_main_queue(), ^{
+											   [MBProgressHUD hideHUDForView:self.view animated:YES];
+										   });
+										   
 										   NSHTTPURLResponse *repsonse = [error.userInfo objectForKey:@"AFNetworkingOperationFailingURLResponseErrorKey"];
 										   NSDictionary *respHeaders = [repsonse allHeaderFields];
 										   NSString *failText = @"";
